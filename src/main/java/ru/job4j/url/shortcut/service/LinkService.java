@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.url.shortcut.model.Link;
 import ru.job4j.url.shortcut.repository.LinkRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -26,6 +27,10 @@ public class LinkService {
     public Link findByShortName(String shortName) {
         return linkRepository.findByShortName(shortName).orElseThrow(() ->
                 new NoSuchElementException("Link with such shortName doesn't exist"));
+    }
+
+    public List<Link> findAll() {
+        return linkRepository.findAll();
     }
 
     public String generateShortLink(String longName) {

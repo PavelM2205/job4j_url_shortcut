@@ -7,10 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.url.shortcut.model.Link;
 import ru.job4j.url.shortcut.model.LinkDTO;
+import ru.job4j.url.shortcut.model.LinkStatisticDTO;
 import ru.job4j.url.shortcut.service.LinkService;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -38,5 +41,13 @@ public class LinkController {
         return ResponseEntity.status(HttpStatus.FOUND)
                 .header(HttpHeaders.LOCATION, link.getLongName())
                 .build();
+    }
+
+    @GetMapping("/statistic")
+    public List<LinkStatisticDTO> getStatistic() {
+        List<Link> links = linkService.findAll();
+        return links.stream()
+                .map(link -> new LinkStatisticDTO(link))
+                .collect(Collectors.toList());
     }
 }

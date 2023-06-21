@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import ru.job4j.url.shortcut.model.Link;
+import ru.job4j.url.shortcut.model.LinkStatisticDTO;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface LinkRepository extends CrudRepository<Link, Integer> {
@@ -16,4 +18,6 @@ public interface LinkRepository extends CrudRepository<Link, Integer> {
     @Modifying
     @Query("UPDATE Link SET total = total + 1 WHERE shortName = ?1")
     void incrementTotal(String shortName);
+
+    List<Link> findAll();
 }
