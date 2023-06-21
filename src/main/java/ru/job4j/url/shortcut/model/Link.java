@@ -14,8 +14,9 @@ public class Link {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int id;
-    @Column(unique = true)
+    @Column(name = "long_name", unique = true)
     private String longName;
-    @Column(unique = true)
+    @Column(name = "short_name", unique = true)
     private String shortName;
+    private int total;
 }
