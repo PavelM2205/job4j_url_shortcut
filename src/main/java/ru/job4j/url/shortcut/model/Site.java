@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Data
 @Entity
@@ -19,7 +18,4 @@ public class Site {
     private String name;
     private String login;
     private String password;
-    @OneToMany
-    @JoinColumn(name = "site_id")
-    private Set<Link> references;
  }
