@@ -1,0 +1,9 @@
+package ru.job4j.url.shortcut.model;
+
+import lombok.Data;
+
+@Data
+public class UserDTO {
+    private String login;
+    private String password;
+}

@@ -21,16 +21,16 @@ public class LinkController {
     private final LinkService linkService;
 
     @PostMapping("/convert")
-    public LinkDTO convert(@RequestBody Map<String, String> body) {
+    public ResponseEntity<LinkDTO> convert(@RequestBody Map<String, String> body) {
         String longName = body.get("url");
         Link link = new Link();
         link.setLongName(longName);
         link.setShortName(linkService.generateShortLink(longName));
         Optional<Link> optLink = linkService.save(link);
         if (optLink.isEmpty()) {
-            return new LinkDTO(linkService.findByLongName(longName));
+            return ResponseEntity.ok(new LinkDTO(linkService.findByLongName(longName)));
         }
-        return new LinkDTO(optLink.get());
+        return ResponseEntity.ok(new LinkDTO(optLink.get()));
     }
 
     @GetMapping("/redirect/{shortLink}")
@@ -44,10 +44,10 @@ public class LinkController {
     }
 
     @GetMapping("/statistic")
-    public List<LinkStatisticDTO> getStatistic() {
+    public ResponseEntity<List<LinkStatisticDTO>> getStatistic() {
         List<Link> links = linkService.findAll();
-        return links.stream()
+        return ResponseEntity.ok(links.stream()
                 .map(link -> new LinkStatisticDTO(link))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 }
