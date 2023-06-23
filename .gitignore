@@ -34,3 +34,8 @@ build/
 
 ### VS Code ###
 *.db
+
+### Maven ###
+.mvn
+mvnw
+mvnw.cmd
