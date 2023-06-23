@@ -23,6 +23,9 @@ public class LinkController {
     @PostMapping("/convert")
     public ResponseEntity<LinkDTO> convert(@RequestBody Map<String, String> body) {
         String longName = body.get("url");
+        if (longName.isEmpty()) {
+            throw new NullPointerException("Parameter url mustn't be empty");
+        }
         Link link = new Link();
         link.setLongName(longName);
         link.setShortName(linkService.generateShortLink(longName));
@@ -47,7 +50,7 @@ public class LinkController {
     public ResponseEntity<List<LinkStatisticDTO>> getStatistic() {
         List<Link> links = linkService.findAll();
         return ResponseEntity.ok(links.stream()
-                .map(link -> new LinkStatisticDTO(link))
+                .map(LinkStatisticDTO::new)
                 .collect(Collectors.toList()));
     }
 }

@@ -19,6 +19,9 @@ public class SiteController {
     @PostMapping("/registration")
     public ResponseEntity<SiteDTO> registration(@RequestBody Map<String, String> body) {
         String siteName = body.get("site");
+        if (siteName.isEmpty()) {
+            throw new NullPointerException("Parameter site mustn't be empty");
+        }
         boolean registrationResult = false;
         Site site = siteService.generateLoginAndPassword(siteName);
         Optional<Site> optSite = siteService.create(site);
