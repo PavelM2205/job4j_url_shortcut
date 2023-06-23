@@ -1,4 +1,4 @@
-package ru.job4j.url.shortcut.service;
+package ru.job4j.url.shortcut.util;
 
 public interface RandomGenerator {
 

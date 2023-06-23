@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.url.shortcut.model.Link;
 import ru.job4j.url.shortcut.repository.LinkRepository;
+import ru.job4j.url.shortcut.util.RandomGenerator;
 
 import java.util.List;
 import java.util.NoSuchElementException;

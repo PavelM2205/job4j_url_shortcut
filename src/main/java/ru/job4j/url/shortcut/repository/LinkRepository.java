@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import ru.job4j.url.shortcut.model.Link;
-import ru.job4j.url.shortcut.model.LinkStatisticDTO;
 
 import java.util.List;
 import java.util.Optional;

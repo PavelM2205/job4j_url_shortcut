@@ -1,6 +1,7 @@
-package ru.job4j.url.shortcut.model;
+package ru.job4j.url.shortcut.dto;
 
 import lombok.Data;
+import ru.job4j.url.shortcut.model.Site;
 
 @Data
 public class SiteDTO {

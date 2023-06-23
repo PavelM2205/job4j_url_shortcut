@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.url.shortcut.model.Site;
-import ru.job4j.url.shortcut.model.SiteDTO;
+import ru.job4j.url.shortcut.dto.SiteDTO;
 import ru.job4j.url.shortcut.service.SiteService;
 
 import java.util.Map;

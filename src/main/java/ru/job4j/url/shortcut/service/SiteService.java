@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.job4j.url.shortcut.model.Site;
 import ru.job4j.url.shortcut.repository.SiteRepository;
+import ru.job4j.url.shortcut.util.RandomGenerator;
 
 import java.util.Collections;
 import java.util.List;

@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.url.shortcut.model.Link;
-import ru.job4j.url.shortcut.model.LinkDTO;
-import ru.job4j.url.shortcut.model.LinkStatisticDTO;
+import ru.job4j.url.shortcut.dto.LinkDTO;
+import ru.job4j.url.shortcut.dto.LinkStatisticDTO;
 import ru.job4j.url.shortcut.service.LinkService;
 
 import java.util.List;

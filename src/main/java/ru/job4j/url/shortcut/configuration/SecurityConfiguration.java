@@ -1,4 +1,4 @@
-package ru.job4j.url.shortcut.config;
+package ru.job4j.url.shortcut.configuration;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +16,7 @@ import ru.job4j.url.shortcut.service.SiteService;
 
 @EnableWebSecurity
 @AllArgsConstructor
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final SiteService siteService;
 
     @Override
