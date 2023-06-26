@@ -51,16 +51,45 @@
 Для этого необходимо отправить POST-запрос с телом запроса `"site":"ИМЯ_САЙТА"`
 по адресу http://localhost:8080/registration.
 
+Пример запроса:
+![ScreenShot](src/main/resources/img/registration_request.png)
+
+Ответ:
+![ScreenShot](src/main/resources/img/registration_response.png)
+
 Далее для аутентификации необходимо отправить полученные
 логин и пароль в формате POST-запроса `"login":"ПОЛУЧЕННЫЙ_ЛОГИН, "password":"ПОЛУЧЕННЫЙ_ПАРОЛЬ"`
 по адресу http://localhost:8080/login.
 
+Пример запроса:
+![ScreenShot](src/main/resources/img/login_request.png)
+
+Ответ:
+![ScreenShot](src/main/resources/img/login_response.png)
+
 Для того, чтобы сгенерировать короткую ссылку отправьте POST-запрос в формате
 `"url":"АДРЕС_ССЫЛКИ"` по адресу http://localhost:8080/convert.
+
+Пример запроса:
+![ScreenShot](src/main/resources/img/convert_request.png)
+
+Ответ:
+![ScreenShot](src/main/resources/img/convert_response.png)
 
 Для того, чтобы перейти по адресу короткой ссылки на требующийся ресурс
 отправьте GET-запрос по адресу http://localhost:8080/redirect/{shortLink}, где
 `{shortLink}` - это имя короткой ссылки.
 
+Пример запроса:
+![ScreenShot](src/main/resources/img/redirect_request.png)
+
 Для получения статистики о количестве запросов по каждому URL-адресу
 отправьте GET-запрос по адресу http://localhost:8080/statistic.
+
+Пример запроса:
+![ScreenShot](src/main/resources/img/statistic_request.png)
+
+Ответ:
+![ScreenShot](src/main/resources/img/statistic_response.png)
+
+

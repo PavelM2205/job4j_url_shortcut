@@ -1,6 +1,6 @@
 CREATE TABLE sites (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL UNIQUE,
-    login TEXT NOT NULL,
+    login TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL
 );

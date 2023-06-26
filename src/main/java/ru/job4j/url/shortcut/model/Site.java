@@ -16,6 +16,7 @@ public class Site {
     private int id;
     @Column(unique = true)
     private String name;
+    @Column(unique = true)
     private String login;
     private String password;
  }

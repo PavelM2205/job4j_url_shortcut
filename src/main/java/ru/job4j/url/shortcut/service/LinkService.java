@@ -1,6 +1,7 @@
 package ru.job4j.url.shortcut.service;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class LinkService {
     private static final int REFERENCES_LENGTH = 7;
 
@@ -44,7 +46,7 @@ public class LinkService {
             linkRepository.save(link);
             result = Optional.of(link);
         } catch (DataIntegrityViolationException exc) {
-            return result;
+            log.error("Exception while saving Link");
         }
         return result;
     }

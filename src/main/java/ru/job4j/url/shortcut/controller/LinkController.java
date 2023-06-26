@@ -5,15 +5,19 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.job4j.url.shortcut.dto.LongLinkDTO;
 import ru.job4j.url.shortcut.model.Link;
-import ru.job4j.url.shortcut.dto.LinkDTO;
+import ru.job4j.url.shortcut.dto.ShortLinkDTO;
 import ru.job4j.url.shortcut.dto.LinkStatisticDTO;
 import ru.job4j.url.shortcut.service.LinkService;
+import ru.job4j.url.shortcut.util.LinkDTOMapper;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static ru.job4j.url.shortcut.util.LinkDTOMapper.*;
 
 @RestController
 @AllArgsConstructor
@@ -21,24 +25,18 @@ public class LinkController {
     private final LinkService linkService;
 
     @PostMapping("/convert")
-    public ResponseEntity<LinkDTO> convert(@RequestBody Map<String, String> body) {
-        String longName = body.get("url");
-        if (longName.isEmpty()) {
-            throw new NullPointerException("Parameter url mustn't be empty");
-        }
-        Link link = new Link();
-        link.setLongName(longName);
-        link.setShortName(linkService.generateShortLink(longName));
+    public ResponseEntity<ShortLinkDTO> convert(@Valid @RequestBody LongLinkDTO longLinkDTO) {
+        Link link = fromLongLinkDtoToLink(longLinkDTO);
+        link.setShortName(linkService.generateShortLink(link.getLongName()));
         Optional<Link> optLink = linkService.save(link);
         if (optLink.isEmpty()) {
-            return ResponseEntity.ok(new LinkDTO(linkService.findByLongName(longName)));
+            return ResponseEntity.ok(fromLinkToShortLinkDto(linkService.findByLongName(link.getLongName())));
         }
-        return ResponseEntity.ok(new LinkDTO(optLink.get()));
+        return ResponseEntity.ok(fromLinkToShortLinkDto(optLink.get()));
     }
 
     @GetMapping("/redirect/{shortLink}")
     public ResponseEntity<Void> shortLinkRedirect(@PathVariable String shortLink) {
-        System.out.println(shortLink);
         Link link = linkService.findByShortName(shortLink);
         linkService.incrementTotal(shortLink);
         return ResponseEntity.status(HttpStatus.FOUND)
@@ -50,7 +48,7 @@ public class LinkController {
     public ResponseEntity<List<LinkStatisticDTO>> getStatistic() {
         List<Link> links = linkService.findAll();
         return ResponseEntity.ok(links.stream()
-                .map(LinkStatisticDTO::new)
+                .map(LinkDTOMapper::fromLinkToLinkStatisticDto)
                 .collect(Collectors.toList()));
     }
 }

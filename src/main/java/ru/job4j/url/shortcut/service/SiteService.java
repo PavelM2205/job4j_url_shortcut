@@ -1,6 +1,7 @@
 package ru.job4j.url.shortcut.service;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class SiteService implements UserDetailsService {
     private static final int PASSWORD_LENGTH = 6;
     private static final int LOGIN_LENGTH = 6;
@@ -38,7 +40,7 @@ public class SiteService implements UserDetailsService {
             siteRepository.save(site);
             result = Optional.of(site);
         } catch (DataIntegrityViolationException exc) {
-            return result;
+            log.error("Exception while creating Site");
         }
         return result;
     }
@@ -66,6 +68,12 @@ public class SiteService implements UserDetailsService {
     public Site generateLoginAndPassword(String siteName) {
         Site site = new Site();
         site.setName(siteName);
+        site.setLogin(generateRandomLogin());
+        site.setPassword(generateRandomPassword());
+        return site;
+    }
+
+    public Site generateLoginAndPassword(Site site) {
         site.setLogin(generateRandomLogin());
         site.setPassword(generateRandomPassword());
         return site;
